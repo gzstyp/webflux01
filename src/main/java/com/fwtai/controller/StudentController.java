@@ -13,7 +13,16 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-//基于注解实现 webflux 的方式
+/**
+ * 基于注解实现 webflux 的方式
+ * 使用注解的返回值中Mono的个数 0和或1个;而Flux则可以是0个或N个
+ * @作者 田应平
+ * @版本 v1.0
+ * @创建时间 2021/2/7 1:33
+ * @QQ号码 444141300
+ * @Email service@yinlz.com
+ * @官网 <url>http://www.yinlz.com</url>
+*/
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -24,14 +33,14 @@ public class StudentController {
         this.studentRepository = studentRepository;
     }
 
-    // http://127.0.0.1/api/students/index
-    @GetMapping("/index")
-    public Flux<Student> index(){
+    // http://127.0.0.1/api/students/findAll
+    @GetMapping("/findAll")
+    public Flux<Student> findAll(){
         return studentRepository.findAll();
     }
 
     /**
-     * 采用Flux或Mono都能实现响应式或stream流式模型,Flux<T>适用于返回List
+     * 采用Flux或Mono都能实现响应式或stream流式模型,Flux<T>适用于返回List,使用注解的返回值中Mono的个数 0和或1个;而Flux则可以是0个或N个
      * http://127.0.0.1/api/students/list
      * @param
      * @作者 田应平
@@ -60,7 +69,7 @@ public class StudentController {
     }
 
     /**
-     * 采用Flux或Mono都能实现响应式或stream流式模型,Mono<T>适用于返回单个对象
+     * 采用Flux或Mono都能实现响应式或stream流式模型,Mono<T>适用于返回单个对象,使用注解的返回值中Mono的个数 0和或1个;而Flux则可以是0个或N个
      * http://127.0.0.1/api/students/user
      * @param
      * @作者 田应平
