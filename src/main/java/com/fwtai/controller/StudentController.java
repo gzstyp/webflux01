@@ -49,6 +49,15 @@ public class StudentController {
         return Flux.fromIterable(list).delayElements(Duration.ofSeconds(1));
     }
 
+    // Flux<T>适用于返回List,http://127.0.0.1/api/list
+    @GetMapping("/list")
+    public Flux<String> list(){
+        final ArrayList<String> list = new ArrayList<>();
+        list.add("object");
+        list.add(",webflux");
+        return Flux.fromIterable(list);
+    }
+
     /**
      * 采用Flux或Mono都能实现响应式或stream流式模型,Mono<T>适用于返回单个对象
      * http://127.0.0.1/api/students/user
