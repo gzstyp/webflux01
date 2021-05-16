@@ -2,6 +2,7 @@ package com.fwtai.controller;
 
 import com.fwtai.entity.Student;
 import com.fwtai.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,8 @@ import java.util.List;
 @RequestMapping("/api/students")
 public class StudentController {
 
-    private final StudentRepository studentRepository;
-
-    public StudentController(final StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    @Autowired
+    private StudentRepository studentRepository;
 
     // http://127.0.0.1/api/students/findAll
     @GetMapping("/findAll")
@@ -49,7 +47,7 @@ public class StudentController {
      */
     @GetMapping(value = "/list",produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<Student> getList(){
-        final List<Student> list = new ArrayList();
+        final List<Student> list = new ArrayList<Student>();
         for(int i = 0; i < 5; i++){
             final Student student = new Student();
             student.setId(1025429L);
@@ -82,5 +80,28 @@ public class StudentController {
         student.setId(1000010L);
         student.setName("田卓智");
         return Mono.just(student);
+    }
+
+    //http://127.0.0.1/api/students/edit
+    @GetMapping("/edit")
+    public Mono<Student> edit(){
+        final Student student = new Student();
+        student.setId(2L);
+        student.setName("田卓智");
+        student.setCode("1478741");
+        Mono<Student> save = studentRepository.save(student);
+        return save;
+        //return Mono.just(student);
+    }
+
+    //http://127.0.0.1/api/students/add
+    @GetMapping("/add")
+    public Mono<Student> add(){
+        final Student student = new Student();
+        student.setName("田卓智");
+        student.setCode("1478741");
+        Mono<Student> save = studentRepository.save(student);
+        return save;
+        //return Mono.just(student);
     }
 }

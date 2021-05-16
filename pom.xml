@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.8.RELEASE</version>
+        <version>2.4.5</version>
         <relativePath/>
     </parent>
     <groupId>com.fwtai</groupId>
@@ -13,7 +13,7 @@
     <version>v1.0.0</version>
 
     <description>
-        Spring WebFlux 使用 R2DBC 访问 MySQL 数据库,但是添加操作有问题
+        Spring WebFlux 使用 R2DBC 访问 MySQL 数据库,当主键且仅当为自增长时id为空时是添加,不为空时是编辑
     </description>
 
     <properties>
